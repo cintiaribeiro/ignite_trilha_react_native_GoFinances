@@ -11,6 +11,7 @@ import {
 import themes from './src/global/styles/themes';
 
 import { Dashboard } from './src/screens/Dashboard';
+import { Register } from './src/screens/Registrer';
 
 export default function App() {
 
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <ThemeProvider theme={themes}>
       
-      <Dashboard/>
+      <Register/>
 
     </ThemeProvider>
     
