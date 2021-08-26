@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import {StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading';
@@ -9,6 +10,9 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
+
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 
 import themes from './src/global/styles/themes';
 
@@ -30,6 +34,11 @@ export default function App() {
     <ThemeProvider theme={themes}>
       
       <NavigationContainer>
+        <StatusBar 
+          barStyle='light-content'  
+          backgroundColor="transparent"
+          translucent
+        />
         <AppRoutes/>
       </NavigationContainer>
 
