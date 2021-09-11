@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {StatusBar} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading';
 import {
@@ -14,9 +13,13 @@ import {
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 
+import { Routes } from './src/routes';
+
 import themes from './src/global/styles/themes';
 
-import { AppRoutes } from './src/routes/app.routes'
+import { AuthProvider, useAuth } from './src/hooks/auth'; 
+
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -25,23 +28,23 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if(!fontsLoaded){
+  const { userStorageLoading } = useAuth();
+
+  if(!fontsLoaded || userStorageLoading){
     return <AppLoading />
   }
 
 
   return (
-    <ThemeProvider theme={themes}>
-      
-      <NavigationContainer>
+    <ThemeProvider theme={themes}>      
         <StatusBar 
           barStyle='light-content'  
           backgroundColor="transparent"
           translucent
         />
-        <AppRoutes/>
-      </NavigationContainer>
-
+        <AuthProvider>
+          <Routes/>
+        </AuthProvider>
     </ThemeProvider>
     
   );
